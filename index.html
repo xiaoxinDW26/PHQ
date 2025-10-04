@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>PHQ测试 V2.06XinBeta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .question {
+            display: none;
+            margin-bottom: 20px;
+        }
+        .options button {
+            display: block;
+            margin: 5px 0;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+        }
+        #result {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .consent {
+            margin-bottom: 20px;
+        }
+        .consent .warning {
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .consent button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .consent button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>PHQ测试V2.09【小鑫制作10/5】</h1>
+    <div class="consent" id="consent">
+        <div class="warning">
+            ⚠️ <strong>重要提示</strong>：PHQ 测试仅为抑郁症状的初步筛查工具，非专业诊断依据。测试结果受个人答题时的情绪、认知偏差等因素影响，可能存在偏差。若您有情绪困扰或疑似抑郁症状，请务必咨询精神科医生或专业心理咨询师，通过临床面谈、病史评估等综合方式获取专业诊断与干预建议，切勿仅凭本测试结果自行判断或调整应对方式。
+        </div>
+        <button id="agreeBtn">我已了解并同意，开始测试</button>
+    </div>
+    <!-- 题目容器，初始隐藏 -->
+    <div id="question-container" style="display: none;">
+        <div class="question" data-index="0">
+            <p>1.做事时提不起劲或没有兴趣</p >
+            <div class="options">
+                <button data-score="0">完全没有</button>
+                <button data-score="1">几天</button>
+                <button data-score="2">一半以上的天数</button>
+                <button data-score="3">几乎每天</button>
+            </div>
+        </div>
+        <div class="question" data-index="1">
+            <p>2.感到心情低落、沮丧或绝望</p >
+            <div class="options">
+                <button data-score="0">完全没有</button>
+                <button data-score="1">几天</button>
+                <button data-score="2">一半以上的天数</button>
+                <button data-score="3">几乎每天</button>
+            </div>
+        </div>
+        <div class="question" data-index="2">
+            <p>3.入睡困难、睡不安稳或睡眠过多</p >
+            <div class="options">
+                <button data-score="0">完全没有</button>
+                <button data-score="1">几天</button>
+                <button data-score="2">一半以上的天数</button>
+                <button data-score="3">几乎每天</button>
+            </div>
+        </div>
+        <div class="question" data-index="3">
+            <p>4.感觉疲倦或没有活力</p >
+            <div class="options">
+                <button data-score="0">完全没有</button>
+                <button data-score="1">几天</button>
+                <button data-score="2">一半以上的天数</button>
+                <button data-score="3">几乎每天</button>
+            </div>
+        </div>
+        <div class="question" data-index="4">
+            <p>5.食欲不振或吃太多</p >
+            <div class="options">
+                <button data-score="0">完全没有</button>
+                <button data-score="1">几天</button>
+                <button data-score="2">一半以上的天数</button>
+                <button data-score="3">几乎每天</button>
+            </div>
+        </div>
+        <div class="question" data-index="5">
+            <p>6.觉得自己很糟或觉得自己很失败，或让自己 / 家人失望</p >
+            <div class="options">
+                <button data-score="0">完全没有</button>
+                <button data-score="1">几天</button>
+                <button data-score="2">一半以上的天数</button>
+                <button data-score="3">几乎每天</button>
+            </div>
+        </div>
+        <div class="question" data-index="6">
+            <p>7.行动或说话速度缓慢到别人已经察觉，或相反 —— 烦躁或坐立不安、动来动去</p >
+            <div class="options">
+                <button data-score="0">完全没有</button>
+                <button data-score="1">几天</button>
+                <button data-score="2">一半以上的天数</button>
+                <button data-score="3">几乎每天</button>
+            </div>
+        </div>
+        <div class="question" data-index="7">
+            <p>8.有不如死掉或用某种方式伤害自己的念头</p >
+            <div class="options">
+                <button data-score="0">完全没有</button>
+                <button data-score="1">几天</button>
+                <button data-score="2">一半以上的天数</button>
+                <button data-score="3">几乎每天</button>
+            </div>
+        </div>
+        <div class="question" data-index="8">
+            <p>9.对事物专注有困难（如看报纸或看电视时）</p >
+            <div class="options">
+                <button data-score="0">完全没有</button>
+                <button data-score="1">几天</button>
+                <button data-score="2">一半以上的天数</button>
+                <button data-score="3">几乎每天</button>
+            </div>
+        </div>
+    </div>
+    <button id="next-btn" style="display: none;">下一题</button>
+    <div id="result">
+        <h2>测试结果</h2>
+        <p id="score-text"></p >
+        <p id="interpretation"></p >
+    </div>
+    <script>
+        const consent = document.getElementById('consent');
+        const agreeBtn = document.getElementById('agreeBtn');
+        const questionContainer = document.getElementById('question-container');
+        const questions = document.querySelectorAll('.question');
+        const nextBtn = document.getElementById('next-btn');
+        const result = document.getElementById('result');
+        const scoreText = document.getElementById('score-text');
+        const interpretation = document.getElementById('interpretation');
+        let currentQuestionIndex = 0;
+        let scores = new Array(questions.length).fill(0); // 存储每道题的得分，初始为0
+
+        function showCurrentQuestion() {
+            questions.forEach((question, index) => {
+                if (index === currentQuestionIndex) {
+                    question.style.display = 'block';
+                } else {
+                    question.style.display = 'none';
+                }
+            });
+            if (currentQuestionIndex === 0) {
+                nextBtn.style.display = 'none';
+            } else {
+                nextBtn.style.display = 'inline-block';
+            }
+        }
+
+        agreeBtn.addEventListener('click', function() {
+            consent.style.display = 'none';
+            questionContainer.style.display = 'block';
+            showCurrentQuestion();
+        });
+
+        document.querySelectorAll('.options button').forEach(button => {
+            button.addEventListener('click', function() {
+                const options = this.parentElement.querySelectorAll('button');
+                options.forEach(opt => opt.style.backgroundColor = '');
+                this.style.backgroundColor = '#e0e0e0';
+                const score = parseInt(this.getAttribute('data-score'));
+                scores[currentQuestionIndex] = score; // 存储当前题的得分
+                if (currentQuestionIndex < questions.length - 1) {
+                    nextBtn.style.display = 'inline-block';
+                } else {
+                    calculateResult();
+                }
+            });
+        });
+
+        nextBtn.addEventListener('click', function() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                showCurrentQuestion();
+            }
+        });
+
+        function calculateResult() {
+            // 累加所有得分
+            const totalScore = scores.reduce((sum, val) => sum + val, 0);
+            questions.forEach(question => question.style.display = 'none');
+            nextBtn.style.display = 'none';
+            result.style.display = 'block';
+            scoreText.textContent = `你的得分是：${totalScore}`;
+            if (totalScore === 0) {
+                interpretation.textContent = '情绪状态良好，无明显抑郁倾向。';
+            } else if (totalScore <= 4) {
+                interpretation.textContent = '可能有轻微的情绪问题，建议关注自身状态。';
+            } else if (totalScore <= 9) {
+                interpretation.textContent = '可能存在一定程度的抑郁情绪，可考虑寻求专业帮助。';
+            } else {
+                interpretation.textContent = '抑郁倾向较为明显，建议尽快咨询专业心理医生。';
+            }
+        }
+    </script>
+</body>
+</html>
